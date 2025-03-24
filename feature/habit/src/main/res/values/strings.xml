@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_habit_title">Habit</string>
+    <string name="feature_habit_loading">Loading saved…</string>
+    <string name="feature_habit_empty_error">No saved updates</string>
+    <string name="feature_habit_empty_description">Updates you save will be stored here\nto read later</string>
+    <string name="feature_habit_removed">Bookmark removed</string>
+    <string name="feature_habit_undo">UNDO</string>
+</resources>
