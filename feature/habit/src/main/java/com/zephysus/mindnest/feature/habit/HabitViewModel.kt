@@ -28,10 +28,13 @@ class HabitViewModel @Inject constructor(
 ) : ViewModel() {
     val habitUiState: StateFlow<HabitUiState> =
         habitRepository.getHabitsStream().map<List<Habit>, HabitUiState>(HabitUiState::Success)
-            .onStart { emit(HabitUiState.Loading) }
-            .stateIn(
+            .onStart { emit(HabitUiState.Loading) }.stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = HabitUiState.Loading,
             )
+
+    suspend fun deleteHabitById(habitId: String) {
+        habitRepository.deleteHabit(habitId)
+    }
 }
