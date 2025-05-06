@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-
 @Composable
 internal fun HabitRoute(
     onCreateHabitClick: () -> Unit,
@@ -31,7 +30,10 @@ internal fun HabitRoute(
     val habitState by viewModel.habitUiState.collectAsStateWithLifecycle()
 
     HabitScreen(
-        onCreateHabitClick = onCreateHabitClick, habitState = habitState, modifier = modifier
+        onCreateHabitClick = onCreateHabitClick,
+        habitState = habitState,
+        viewModel = viewModel,
+        modifier = modifier
     )
 }
 
@@ -39,6 +41,7 @@ internal fun HabitRoute(
 internal fun HabitScreen(
     onCreateHabitClick: () -> Unit,
     habitState: HabitUiState,
+    viewModel: HabitViewModel,
     modifier: Modifier = Modifier,
 ) {
     when (habitState) {
@@ -68,7 +71,7 @@ internal fun HabitScreen(
                             Text(habitResource.createdAt.toString())
                         }
                         IconButton(onClick = {
-
+                            viewModel.deleteHabitById(habitResource.id)
                         }) {
                             Icon(Icons.Rounded.Delete, contentDescription = "Delete")
                         }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -34,7 +35,9 @@ class HabitViewModel @Inject constructor(
                 initialValue = HabitUiState.Loading,
             )
 
-    suspend fun deleteHabitById(habitId: String) {
-        habitRepository.deleteHabit(habitId)
+    fun deleteHabitById(habitId: String) {
+        viewModelScope.launch {
+            habitRepository.deleteHabit(habitId)
+        }
     }
 }
