@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -28,10 +29,15 @@ class HabitViewModel @Inject constructor(
 ) : ViewModel() {
     val habitUiState: StateFlow<HabitUiState> =
         habitRepository.getHabitsStream().map<List<Habit>, HabitUiState>(HabitUiState::Success)
-            .onStart { emit(HabitUiState.Loading) }
-            .stateIn(
+            .onStart { emit(HabitUiState.Loading) }.stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = HabitUiState.Loading,
             )
+
+    fun deleteHabitById(habitId: String) {
+        viewModelScope.launch {
+            habitRepository.deleteHabit(habitId)
+        }
+    }
 }

@@ -6,4 +6,9 @@
     <string name="feature_habit_empty_description">Updates you save will be stored here\nto read later</string>
     <string name="feature_habit_removed">Bookmark removed</string>
     <string name="feature_habit_undo">UNDO</string>
+    <string name="feature_habit_label_habit_name">Habit Name</string>
+    <string name="feature_habit_label_frequency">Frequency</string>
+    <string name="feature_habit_empty_habit_message">Habit Empty!</string>
+    <string name="feature_habit_save">Save</string>
+    <string name="feature_habit_create">Create</string>
 </resources>
